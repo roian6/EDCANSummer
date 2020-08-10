@@ -1,13 +1,19 @@
 package com.david0926.edcansummer;
 
+import android.os.Bundle;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
-import android.os.Bundle;
-
 import com.david0926.edcansummer.databinding.ActivityRegisterBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class RegisterActivity extends AppCompatActivity {
+
+    private FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
     private ActivityRegisterBinding binding;
 
@@ -25,7 +31,29 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private void register(String name, String email, String pw, String pwcheck){
-        //
+    private void register(String name, String email, String pw, String pwcheck) {
+
+        if (name.isEmpty() || email.isEmpty() || pw.isEmpty() || pwcheck.isEmpty()){
+            Toast.makeText(this, "빈칸을 입력해주세요", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (!pw.equals(pwcheck)){
+            Toast.makeText(this, "비밀번호가 일치하지 않습니다", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        firebaseFirestore
+                .collection("users")
+                .document(email)
+                .set(new UserModel(name, email))
+                .addOnSuccessListener(runnable -> {
+                    firebaseAuth
+                            .createUserWithEmailAndPassword(email, pw)
+                            .addOnSuccessListener(runnable1 -> {
+                                Toast.makeText(this, "정상적으로 가입되었습니다!", Toast.LENGTH_SHORT).show();
+                                finish();
+                            });
+                });
     }
 }
