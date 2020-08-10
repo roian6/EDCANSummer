@@ -1,5 +1,6 @@
 package com.david0926.edcansummer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -21,6 +22,10 @@ public class LoginActivity extends AppCompatActivity {
 
         binding.btnLoginSignin.setOnClickListener(view -> {
             login(binding.getEmail(), binding.getPw());
+        });
+
+        binding.btnLoginSignup.setOnClickListener(view -> {
+            startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
         });
     }
 
