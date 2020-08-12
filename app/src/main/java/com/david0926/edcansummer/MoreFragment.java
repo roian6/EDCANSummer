@@ -34,7 +34,9 @@ public class MoreFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_more, container, false);
 
+        binding.setUser(UserCache.getUser(mContext));
 
+        
         return binding.getRoot();
     }
 }
