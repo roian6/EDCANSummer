@@ -23,7 +23,8 @@ public class NewMemoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_new_memo);
-        binding.setMemo("");
+        binding.setMemo(getIntent().getStringExtra("memo_text"));
+        binding.setIsEdit(getIntent().getBooleanExtra("is_edit", false));
 
         binding.toolbarNewMemo.setNavigationOnClickListener(view -> finish());
 
@@ -38,15 +39,22 @@ public class NewMemoActivity extends AppCompatActivity {
             model.setText(binding.getMemo());
             model.setTime(getTime());
 
-            firebaseFirestore
-                    .collection("memo")
-                    .document()
-                    .set(model)
-                    .addOnSuccessListener(runnable -> {
-                        Toast.makeText(this, "정상적으로 등록되었습니다!", Toast.LENGTH_SHORT).show();
-                        finish();
-                    })
-                    .addOnFailureListener(e -> Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show());
+            if(!getIntent().getBooleanExtra("is_edit", false)){
+                //게시물 업로드
+                firebaseFirestore
+                        .collection("memo")
+                        .document()
+                        .set(model)
+                        .addOnSuccessListener(runnable -> {
+                            Toast.makeText(this, "정상적으로 등록되었습니다!", Toast.LENGTH_SHORT).show();
+                            finish();
+                        })
+                        .addOnFailureListener(e -> Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show());
+            }
+            else{
+                //게시물 수정
+                Toast.makeText(this, "수정은 안돼요..ㅠㅠ", Toast.LENGTH_SHORT).show();
+            }
         });
 
     }

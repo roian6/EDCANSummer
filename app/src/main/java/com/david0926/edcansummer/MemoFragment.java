@@ -19,6 +19,11 @@ import com.david0926.edcansummer.databinding.FragmentMemoBinding;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.Locale;
+
 public class MemoFragment extends Fragment {
 
     public static MemoFragment newInstance() {
@@ -47,6 +52,18 @@ public class MemoFragment extends Fragment {
         MemoAdapter adapter = new MemoAdapter();
         binding.recyclerMemo.setAdapter(adapter);
 
+        adapter.setOnItemClickListener((view, item) -> {
+            Intent intent = new Intent(mContext, NewMemoActivity.class);
+            intent.putExtra("is_edit", true);
+            intent.putExtra("memo_text", item.getText());
+            startActivity(intent);
+        });
+
+        adapter.setOnItemLongClickListener((view, item) -> {
+            //
+            return true;
+        });
+
         binding.setItems(items);
 
         binding.fabMemo.setOnClickListener(view -> startActivity(new Intent(mContext, NewMemoActivity.class)));
@@ -66,9 +83,19 @@ public class MemoFragment extends Fragment {
                 .collection("memo")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
-                    for(DocumentSnapshot d : queryDocumentSnapshots){
+                    for (DocumentSnapshot d : queryDocumentSnapshots) {
                         items.add(d.toObject(MemoModel.class));
                     }
+
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd hh:mm aa", Locale.ENGLISH);
+                    Collections.sort(items, (memoModel, t1) -> {
+                        try {
+                            return format.parse(t1.getTime()).compareTo(format.parse(memoModel.getTime()));
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                            return 0;
+                        }
+                    });
                 })
                 .addOnFailureListener(e -> Toast.makeText(mContext, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show());
     }

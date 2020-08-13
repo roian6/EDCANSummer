@@ -8,6 +8,10 @@
             name="memo"
             type="String" />
 
+        <variable
+            name="isEdit"
+            type="Boolean" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,7 +26,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
-            app:title="New Memo" />
+            app:title="@{isEdit?`Edit Memo`:`Add Memo`, default=`Add Memo`}" />
 
         <EditText
             android:text="@={memo}"
@@ -42,7 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="upload"
+            android:text="@{isEdit?`edit`:`upload`, default=`upload`}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
