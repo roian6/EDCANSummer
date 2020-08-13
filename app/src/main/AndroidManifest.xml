@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".NewMemoActivity"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".RegisterActivity"
             android:screenOrientation="portrait" />
         <activity
