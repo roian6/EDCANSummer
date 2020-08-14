@@ -1,6 +1,8 @@
 package com.david0926.edcansummer;
 
-public class MemoModel {
+import java.io.Serializable;
+
+public class MemoModel implements Serializable {
     private String time, text, email;
 
     public MemoModel(){}

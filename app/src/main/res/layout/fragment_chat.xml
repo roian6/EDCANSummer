@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -21,14 +21,31 @@
             app:title="채팅"
             app:titleTextAppearance="@style/TitleBarTextAppearance" />
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="196dp"
+            android:layout_height="196dp"
+            android:src="@drawable/ic_undraw_messages"
+            app:layout_constraintBottom_toTopOf="@+id/txt_chat"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:layout_constraintVertical_chainStyle="packed" />
+
         <TextView
+            android:layout_marginTop="16dp"
+            android:id="@+id/txt_chat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="채팅"
+            android:fontFamily="@font/apple_sd_gothic_neo_h"
+            android:gravity="center"
+            android:text="채팅 기능이 곧 추가될 예정입니다.\n많은 기대 부탁드립니다!"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

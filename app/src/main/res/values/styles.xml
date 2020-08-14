@@ -15,6 +15,7 @@
     <style name="BottomNavigationTheme" parent="Theme.AppCompat.Light">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="android:colorForeground">@android:color/white</item>
+        <item name="android:fontFamily">@font/apple_sd_gothic_neo_h</item>
     </style>
 
     <style name="TitleBarTextAppearance" parent="android:TextAppearance">
