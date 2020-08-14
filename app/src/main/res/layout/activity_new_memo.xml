@@ -19,6 +19,7 @@
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.Toolbar
+            app:titleTextAppearance="@style/TitleBarTextAppearance"
             android:id="@+id/toolbar_new_memo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,27 +27,35 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
-            app:title="@{isEdit?`Edit Memo`:`Add Memo`, default=`Add Memo`}" />
+            app:title="@{isEdit?@string/new_memo_edit:@string/new_memo_upload, default=@string/new_memo_upload}" />
 
         <EditText
+            android:padding="16dp"
+            android:background="@drawable/round_box"
+            android:backgroundTint="@color/materialGray1"
+            android:fontFamily="@font/apple_sd_gothic_neo_r"
             android:text="@={memo}"
             android:id="@+id/edt_new_memo"
             android:gravity="start|top"
             android:layout_margin="16dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:hint="Add Memo..."
+            android:hint="@string/new_memo_hint"
             app:layout_constraintBottom_toTopOf="@+id/btn_new_memo_upload"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar_new_memo" />
 
         <Button
+            android:background="@drawable/round_box"
+            android:backgroundTint="@color/colorPrimary"
+            android:textColor="@android:color/white"
+            android:fontFamily="@font/apple_sd_gothic_neo_h"
             android:id="@+id/btn_new_memo_upload"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="@{isEdit?`edit`:`upload`, default=`upload`}"
+            android:text="@{isEdit?@string/new_memo_edit:@string/new_memo_upload, default=@string/new_memo_upload}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

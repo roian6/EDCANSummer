@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">EDCANSummer</string>
+    <string name="new_memo_hint">메모를 작성해 주세요...</string>
+
+    <string name="new_memo_upload">메모 작성하기</string>
+    <string name="new_memo_edit">메모 수정하기</string>
 </resources>
